@@ -1,3 +1,15 @@
+# v1.0.4 (Thu Dec 30 2021)
+
+#### ⚠️ Pushed to `main`
+
+- feat: add fetchStoryHtml ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.3 (Thu Dec 30 2021)
 
 #### ⚠️ Pushed to `main`
