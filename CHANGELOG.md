@@ -1,3 +1,16 @@
+# v1.0.2 (Thu Dec 30 2021)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of github.com:Lullabot/storybook-drupal-addon ([@e0ipso](https://github.com/e0ipso))
+- docs: add screenshot ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.1 (Thu Dec 30 2021)
 
 #### ⚠️ Pushed to `main`
