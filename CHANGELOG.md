@@ -1,3 +1,15 @@
+# v1.0.6 (Thu Dec 30 2021)
+
+#### 🐛 Bug Fix
+
+- fix: test global theme first [#2](https://github.com/Lullabot/storybook-drupal-addon/pull/2) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.5 (Thu Dec 30 2021)
 
 #### 🐛 Bug Fix
