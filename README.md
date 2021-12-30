@@ -6,6 +6,8 @@ A library for best-practice Drupal integration addons in Storybook:
 - Simple drop-down menu
 - URL-linkable state for sharing
 
+![Screenshot](./assets/screenshot.png)
+
 ## Addon authors
 
 As an addon author, you can use this library by adding it as a dependency and adding the following to your `/preset.js` file:
