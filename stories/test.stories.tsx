@@ -1,4 +1,4 @@
-import Test, {TestProps} from './Test';
+import Test from './Test';
 import {StoryFn} from "@storybook/react";
 
 export default {
@@ -6,6 +6,7 @@ export default {
   title: 'Test',
 };
 
+export type TestProps = { prefix: string; };
 const Template: StoryFn<TestProps> = (args) => <Test {...args} />;
 
 export const Default = Template.bind({});

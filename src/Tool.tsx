@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {useGlobals} from '@storybook/api';
 import {
   IconButton,
@@ -13,21 +13,19 @@ export interface Link {
   active: boolean;
   onClick: () => void;
   title: string;
-  machineName: string;
 }
 
-type ExpandedThemeValue = { title: string; machineName: string; };
+type ExpandedThemeValue = { title: string; };
 export type ThemeValue =
   | string
   | ExpandedThemeValue;
 
 const getValue = (value: ThemeValue): ExpandedThemeValue => {
   if (typeof value === 'string') {
-    return {title: value, machineName: value};
+    return {title: value};
   }
   return {
     title: value.title || '',
-    machineName: value.machineName || '',
   };
 };
 
@@ -47,14 +45,13 @@ const getDrupalThemes = (
       {
         id: 'none',
         title: 'No themes in parameters',
-        machineName: 'No themes in parameters',
         active: true,
         onClick: () => {
         },
       }
     ]
 
-export const Tool = () => {
+export const Tool = (): ReactElement => {
   const [{drupalTheme, supportedDrupalThemes}, updateGlobals] = useGlobals();
 
   return (

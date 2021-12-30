@@ -1,7 +1,6 @@
-import React, {ReactElement, useState} from 'react';
+import React, {useState} from 'react';
 
-export type TestProps = { prefix: string; };
-const Test = ({prefix}: TestProps): ReactElement => {
+const Test = ({prefix}) => {
   const [state, setState] = useState(1);
   return (
     <div style={{padding: '1rem'}}>
