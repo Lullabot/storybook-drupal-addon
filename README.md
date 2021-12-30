@@ -12,19 +12,19 @@ As an addon author, you can use this library by adding it as a dependency and ad
 
 ```js
 function config(entry = []) {
-    return [
-        ...entry,
-        require.resolve('storybook-drupal-addon/preview'), // <-- library's preview preset
-        require.resolve('./dist/esm/preset/preview'), // <-- your addon's preview preset (if present)
-    ];
+  return [
+    ...entry,
+    require.resolve('@lullabot/storybook-drupal-addon/preview'), // <-- library's preview preset
+    require.resolve('./dist/esm/preset/preview'), // <-- your addon's preview preset (if present)
+  ];
 }
 
 function managerEntries(entry = []) {
-    return [
-        ...entry,
-        require.resolve('storybook-drupal-addon/manager'),
-        require.resolve('./dist/esm/preset/manager'), // <-- your addon's manager (if present)
-    ];
+  return [
+    ...entry,
+    require.resolve('@lullabot/storybook-drupal-addon/manager'),
+    require.resolve('./dist/esm/preset/manager'), // <-- your addon's manager (if present)
+  ];
 }
 
 module.exports = {config, managerEntries};
@@ -38,8 +38,7 @@ import { useGlobals } from '@storybook/client-api';
 
 const myDecorator = (story, context) => {
   const [{drupalTheme}] = useGlobals();
-
-  return <MyProvider locale={locale}>;
+  return <MyProvider theme={drupalTheme}>;
 };
 ```
 
