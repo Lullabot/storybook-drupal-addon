@@ -1,17 +1,17 @@
 {
-  "name": "storybook-addon-kit",
+  "name": "storybook-drupal-addon",
   "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "description": "Storybook addon to facilitate integrating Storybook with Drupal projects.",
   "keywords": [
     "storybook-addons",
     "style",
-    "test"
+    "drupal"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/Lullabot/storybook-drupal-addon"
   },
-  "author": "winkerVSbecks",
+  "author": "Mateu Aguiló Bosch (e0ipso) <mateu@mateuaguilo.com>",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -36,8 +36,7 @@
     "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --no-manager-cache --quiet\"",
     "build-storybook": "build-storybook",
     "prerelease": "zx scripts/prepublish-checks.mjs",
-    "release": "yarn build && auto shipit",
-    "eject-ts": "zx scripts/eject-typescript.mjs"
+    "release": "yarn build && auto shipit"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -45,8 +44,8 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
-    "@storybook/addon-essentials": "^6.4.0",
-    "@storybook/react": "^6.4.0",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/react": "^6.4.9",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
@@ -81,11 +80,10 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Addon Kit",
+    "displayName": "Dupal Addon",
     "supportedFrameworks": [
       "react",
-      "vue",
-      "angular"
+      "server"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }

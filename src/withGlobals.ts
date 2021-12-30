@@ -1,10 +1,10 @@
-import { StoryFn as StoryFunction, StoryContext } from "@storybook/addons";
-import { useEffect, useGlobals } from "@storybook/addons";
+import { StoryFn as StoryFunction, StoryContext } from '@storybook/addons';
+import { useEffect, useGlobals } from '@storybook/addons';
 
 export const withGlobals = (StoryFn: StoryFunction, context: StoryContext) => {
   const [{ myAddon }] = useGlobals();
   // Is the addon being used in the docs panel
-  const isInDocs = context.viewMode === "docs";
+  const isInDocs = context.viewMode === 'docs';
 
   useEffect(() => {
     // Execute your side effect here
@@ -24,15 +24,15 @@ export const withGlobals = (StoryFn: StoryFunction, context: StoryContext) => {
 
 function displayToolState(selector: string, state: any) {
   const rootElement = document.querySelector(selector);
-  let preElement = rootElement.querySelector("pre");
+  let preElement = rootElement.querySelector('pre');
 
   if (!preElement) {
-    preElement = document.createElement("pre");
-    preElement.style.setProperty("margin-top", "2rem");
-    preElement.style.setProperty("padding", "1rem");
-    preElement.style.setProperty("background-color", "#eee");
-    preElement.style.setProperty("border-radius", "3px");
-    preElement.style.setProperty("max-width", "600px");
+    preElement = document.createElement('pre');
+    preElement.style.setProperty('margin-top', '2rem');
+    preElement.style.setProperty('padding', '1rem');
+    preElement.style.setProperty('background-color', '#eee');
+    preElement.style.setProperty('border-radius', '3px');
+    preElement.style.setProperty('max-width', '600px');
     rootElement.appendChild(preElement);
   }
 

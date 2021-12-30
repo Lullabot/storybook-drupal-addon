@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
-import { useGlobals } from "@storybook/api";
-import { Icons, IconButton } from "@storybook/components";
-import { TOOL_ID } from "./constants";
+import React, { useCallback } from 'react';
+import { useGlobals } from '@storybook/api';
+import { Icons, IconButton } from '@storybook/components';
+import { TOOL_ID } from './constants';
 
 export const Tool = () => {
   const [{ myAddon }, updateGlobals] = useGlobals();
@@ -11,7 +11,7 @@ export const Tool = () => {
       updateGlobals({
         myAddon: myAddon ? undefined : true,
       }),
-    [myAddon]
+    [myAddon],
   );
 
   return (

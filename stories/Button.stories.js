@@ -1,8 +1,8 @@
-import React from "react";
-import { Button } from "./Button";
+import React from 'react';
+import { Button } from './Button';
 
 export default {
-  title: "Example/Button",
+  title: 'Example/Button',
   component: Button,
   parameters: {
     myAddonParameter: `
@@ -18,22 +18,22 @@ const Template = (args) => <Button {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   primary: true,
-  label: "Button",
+  label: 'Button',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: "Button",
+  label: 'Button',
 };
 
 export const Large = Template.bind({});
 Large.args = {
-  size: "large",
-  label: "Button",
+  size: 'large',
+  label: 'Button',
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  size: "small",
-  label: "Button",
+  size: 'small',
+  label: 'Button',
 };
