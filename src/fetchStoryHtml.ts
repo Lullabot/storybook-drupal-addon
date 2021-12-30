@@ -1,11 +1,11 @@
-import { useGlobals } from '@storybook/addons';
-
 type StorybookContext = {
   parameters: {
     options: {
       variant: string;
     };
     fileName: string;
+    drupalTheme?: string;
+    supportedDrupalThemes?: Record<string, { title: string }>;
   };
 };
 
@@ -17,7 +17,6 @@ const fetchStoryHtml = async (
 ) => {
   // Remove trailing slash.
   url = url.replace(/\/$/, '');
-  const [{ drupalTheme }] = useGlobals();
 
   const variant = context.parameters.options.variant;
 
@@ -25,7 +24,7 @@ const fetchStoryHtml = async (
   fetchUrl.search = new URLSearchParams({
     ...params,
     _storyFileName: context.parameters.fileName,
-    _drupalTheme: drupalTheme,
+    _drupalTheme: context.parameters.drupalTheme,
     _variant: variant,
   }).toString();
 
