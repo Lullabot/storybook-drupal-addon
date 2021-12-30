@@ -1,5 +1,9 @@
-import { StoryFn as StoryFunction, StoryContext } from '@storybook/addons';
-import { useEffect, useGlobals } from '@storybook/addons';
+import {
+  StoryContext,
+  StoryFn as StoryFunction,
+  useEffect,
+  useGlobals,
+} from '@storybook/addons';
 
 export const withGlobals = (StoryFn: StoryFunction, context: StoryContext) => {
   const [{ myAddon }] = useGlobals();

@@ -9,6 +9,5 @@
  * https://storybook.js.org/docs/react/writing-stories/decorators#gatsby-focus-wrapper
  */
 import { withGlobals } from '../withGlobals';
-import { withRoundTrip } from '../withRoundTrip';
 
-export const decorators = [withGlobals, withRoundTrip];
+export const decorators = [withGlobals];
