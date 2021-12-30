@@ -1,6 +1,6 @@
 {
   "name": "@lullabot/storybook-drupal-addon",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Storybook addon to facilitate integrating Storybook with Drupal projects.",
   "keywords": [
     "storybook-addons",
