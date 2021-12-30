@@ -1,4 +1,7 @@
 type StorybookContext = {
+  globals: {
+    drupalTheme?: string;
+  };
   parameters: {
     options: {
       variant: string;
@@ -24,7 +27,7 @@ const fetchStoryHtml = async (
   fetchUrl.search = new URLSearchParams({
     ...params,
     _storyFileName: context.parameters.fileName,
-    _drupalTheme: context.parameters.drupalTheme,
+    _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
     _variant: variant,
   }).toString();
 
