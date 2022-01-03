@@ -1,3 +1,15 @@
+# v1.0.7 (Mon Jan 03 2022)
+
+#### 🐛 Bug Fix
+
+- fix: adapt to drupal changes [#3](https://github.com/Lullabot/storybook-drupal-addon/pull/3) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.6 (Thu Dec 30 2021)
 
 #### 🐛 Bug Fix
