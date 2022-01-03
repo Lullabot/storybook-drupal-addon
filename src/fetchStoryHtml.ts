@@ -23,7 +23,7 @@ const fetchStoryHtml = async (
 
   const variant = context.parameters.options.variant;
 
-  const fetchUrl = new URL(`${url}/_storybook_server`);
+  const fetchUrl = new URL(`${url}/_sb_server`);
   fetchUrl.search = new URLSearchParams({
     ...params,
     _storyFileName: context.parameters.fileName,
@@ -40,10 +40,10 @@ const fetchStoryHtml = async (
     const response = await fetch(fetchUrl.toString());
     const htmlContents = await response.text();
     // The HTML contents Drupal sends back includes regions, blocks, menus, etc.
-    // We need to extract the HTML for the ___storybook-wrapper.
+    // We need to extract the HTML for the ___sb-wrapper.
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
-    const sbWrapper = htmlDoc.getElementById('___storybook-wrapper');
+    const sbWrapper = htmlDoc.getElementById('___sb-wrapper');
     // Extract the missing scripts and re-add them.
     // @todo Should we only get the scripts from htmlDoc.body.getElementsByTagName('script')?
     const scripts = htmlDoc.getElementsByTagName('script');
