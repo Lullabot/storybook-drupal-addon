@@ -9,7 +9,8 @@
  * https://storybook.js.org/docs/react/writing-stories/decorators#gatsby-focus-wrapper
  */
 import { withDrupalTheme } from '../withDrupalTheme';
+import { withRoundTrip } from '../withRoundTrip';
 import fetchStoryHtml from '../fetchStoryHtml';
 
-export const decorators = [withDrupalTheme];
+export const decorators = [withDrupalTheme, withRoundTrip];
 export const parameters = { server: { fetchStoryHtml } };
