@@ -1,3 +1,15 @@
+# v1.0.8 (Wed Jan 05 2022)
+
+#### 🐛 Bug Fix
+
+- fix: use CL instead of SB [#4](https://github.com/Lullabot/storybook-drupal-addon/pull/4) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.7 (Mon Jan 03 2022)
 
 #### 🐛 Bug Fix
