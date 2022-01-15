@@ -39,9 +39,14 @@ const fetchStoryHtml = async (
   const response = await fetch(fetchUrl.toString());
   const htmlContents = await response.text();
   if (response.status >= 399) {
+    const statusText = `${response.status} (${response.statusText})`;
+    let headersText = '';
+    response.headers.forEach((value, key) => {
+      headersText += `${key}: ${value}\n`;
+    });
     // There was an error. Storybook should show it.
     throw new Error(
-      `There was an error while making the request to Drupal. Locate the request in the Network tab of your browser's developer tools for more information.\nResponse code: ${response.status} (${response.statusText})\nResponse body: ${htmlContents}.`,
+      `There was an error while making the request to Drupal. Locate the request in the Network tab of your browser's developer tools for more information.\nResponse code: ${statusText}\nResponse Headers:\n${headersText}\nResponse body: ${htmlContents}.`,
     );
   }
   try {
