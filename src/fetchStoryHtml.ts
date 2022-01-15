@@ -47,7 +47,7 @@ const fetchStoryHtml = async (
     const requestedUrl = response.url;
     // There was an error. Storybook should show it.
     throw new Error(
-      `There was an error while making the request to Drupal (${requestedUrl}). Locate the request in the Network tab of your browser's developer tools for more information.\nResponse code: ${statusText}\nResponse Headers:\n${headersText}\nResponse body: ${htmlContents}.`,
+      `There was an error while making the request to Drupal. Locate the request in the Network tab of your browser's developer tools for more information.\nRequested URL: ${requestedUrl}\nResponse code: ${statusText}\nResponse Headers:\n${headersText}\nResponse body: ${htmlContents}.`,
     );
   }
   try {
