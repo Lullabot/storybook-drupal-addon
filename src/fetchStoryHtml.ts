@@ -36,19 +36,31 @@ const fetchStoryHtml = async (
   fetchUrl.username = '';
   fetchUrl.password = '';
 
+  const response = await fetch(fetchUrl.toString());
+  const htmlContents = await response.text();
+  if (response.status >= 399) {
+    const statusText = `${response.status} (${response.statusText})`;
+    let headersText = '';
+    response.headers.forEach((value, key) => {
+      headersText += `${key}: ${value}\n`;
+    });
+    const requestedUrl = response.url;
+    // There was an error. Storybook should show it.
+    throw new Error(
+      `There was an error while making the request to Drupal. Locate the request in the Network tab of your browser's developer tools for more information.\nRequested URL: ${requestedUrl}\nResponse code: ${statusText}\nResponse Headers:\n${headersText}\nResponse body: ${htmlContents}.`,
+    );
+  }
   try {
-    const response = await fetch(fetchUrl.toString());
-    const htmlContents = await response.text();
     // The HTML contents Drupal sends back includes regions, blocks, menus, etc.
     // We need to extract the HTML for the ___cl-wrapper.
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
-    const sbWrapper = htmlDoc.getElementById('___cl-wrapper');
+    const clWrapper = htmlDoc.getElementById('___cl-wrapper');
     // Extract the missing scripts and re-add them.
     // @todo Should we only get the scripts from htmlDoc.body.getElementsByTagName('script')?
     const scripts = htmlDoc.getElementsByTagName('script');
     const newBody = htmlDoc.createElement('body');
-    newBody.innerHTML = sbWrapper.innerHTML;
+    newBody.innerHTML = clWrapper.innerHTML;
     // Include the Drupal "js footer" assets, i.e., all the <script> tags in
     // the <body>.
     newBody.append(...Array.from(scripts));
