@@ -21,15 +21,22 @@ const fetchStoryHtml = async (
   // Remove trailing slash.
   url = url.replace(/\/$/, '');
 
-  const variant = context.parameters.options.variant;
+  const variant = context.parameters?.options?.variant;
 
   const fetchUrl = new URL(`${url}/_cl_server`);
-  fetchUrl.search = new URLSearchParams({
+  const init: {
+    _storyFileName: string;
+    _drupalTheme: string;
+    _variant?: string;
+  } = {
     ...params,
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
-    _variant: variant,
-  }).toString();
+  };
+  if (variant) {
+    init._variant = variant;
+  }
+  fetchUrl.search = new URLSearchParams(init).toString();
 
   // Remove any basic auth embedded into the URL and remove it as it will cause
   // the OPTIONS pre-flight request to fail.
