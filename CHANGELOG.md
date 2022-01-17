@@ -1,3 +1,15 @@
+# v1.0.10 (Mon Jan 17 2022)
+
+#### 🐛 Bug Fix
+
+- fix: variant is optional for stories [#6](https://github.com/Lullabot/storybook-drupal-addon/pull/6) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.9 (Sat Jan 15 2022)
 
 #### 🐛 Bug Fix
