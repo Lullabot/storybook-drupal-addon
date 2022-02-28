@@ -12,6 +12,23 @@ type StorybookContext = {
   };
 };
 
+function createNewBody(htmlDoc: Document): Node {
+  const sbWrapper = htmlDoc.getElementById('___cl-wrapper');
+  // Extract the missing scripts and re-add them.
+  const scripts = htmlDoc.body.getElementsByTagName('script');
+  const newBody = htmlDoc.createElement('body');
+  // Copy the body attributes from the old body to the new, in case there is
+  // anything functionally relevant.
+  htmlDoc.body.getAttributeNames()
+    .map(htmlDoc.body.getAttributeNode.bind(htmlDoc.body))
+    .forEach(newBody.setAttributeNode.bind(newBody));
+  newBody.innerHTML = sbWrapper.innerHTML;
+  // Include the Drupal "js footer" assets, i.e., all the <script> tags in
+  // the <body>.
+  newBody.append(...Array.from(scripts));
+  return newBody;
+}
+
 const fetchStoryHtml = async (
   url: string,
   path: string,
@@ -43,16 +60,10 @@ const fetchStoryHtml = async (
     // We need to extract the HTML for the ___cl-wrapper.
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
-    const sbWrapper = htmlDoc.getElementById('___cl-wrapper');
-    // Extract the missing scripts and re-add them.
-    // @todo Should we only get the scripts from htmlDoc.body.getElementsByTagName('script')?
-    const scripts = htmlDoc.getElementsByTagName('script');
-    const newBody = htmlDoc.createElement('body');
-    newBody.innerHTML = sbWrapper.innerHTML;
-    // Include the Drupal "js footer" assets, i.e., all the <script> tags in
-    // the <body>.
-    newBody.append(...Array.from(scripts));
-    htmlDoc.body = newBody;
+    const newBody = createNewBody(htmlDoc);
+    // Swap the old body for the new.
+    htmlDoc.removeChild(htmlDoc.body);
+    htmlDoc.appendChild(newBody);
     return htmlDoc.children[0].outerHTML;
   } catch (e) {
     console.error(e);
