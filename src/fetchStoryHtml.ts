@@ -19,11 +19,13 @@ function createNewBody(htmlDoc: Document): Node {
   const newBody = htmlDoc.createElement('body');
   // Copy the body attributes from the old body to the new, in case there is
   // anything functionally relevant.
-  htmlDoc.body.getAttributeNames()
+  const bodyAttrs = htmlDoc.body.getAttributeNames()
     .map<Attr | null>(htmlDoc.body.getAttributeNode.bind(htmlDoc.body))
     .filter(Boolean)
-    .map(attr => ({...attr}))
-    .forEach(newBody.setAttributeNode.bind(newBody));
+    .map(attr => ({...attr}));
+  for (const bodyAttr of bodyAttrs) {
+    newBody.setAttributeNode(bodyAttr);
+  }
   newBody.innerHTML = clWrapper.innerHTML;
   // Include the Drupal "js footer" assets, i.e., all the <script> tags in
   // the <body>.
