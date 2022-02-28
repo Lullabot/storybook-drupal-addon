@@ -12,7 +12,7 @@ type StorybookContext = {
   };
 };
 
-function createNewBody(htmlDoc: Document): Node {
+function createNewBody(htmlDoc: Document): HTMLElement {
   const clWrapper = htmlDoc.getElementById('___cl-wrapper');
   // Extract the missing scripts and re-add them.
   const scripts = htmlDoc.getElementsByTagName('script');
@@ -79,10 +79,8 @@ const fetchStoryHtml = async (
     // We need to extract the HTML for the ___cl-wrapper.
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
-    const newBody = createNewBody(htmlDoc);
     // Swap the old body for the new.
-    htmlDoc.removeChild(htmlDoc.body);
-    htmlDoc.appendChild(newBody);
+    htmlDoc.body = createNewBody(htmlDoc);
     return htmlDoc.children[0].outerHTML;
   } catch (e) {
     console.error(e);
