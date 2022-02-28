@@ -1,3 +1,15 @@
+# v1.0.11 (Mon Feb 28 2022)
+
+#### 🐛 Bug Fix
+
+- fix: update body reconstruction [#7](https://github.com/Lullabot/storybook-drupal-addon/pull/7) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.10 (Mon Jan 17 2022)
 
 #### 🐛 Bug Fix
