@@ -2,13 +2,31 @@
 
 A library for best-practice Drupal integration addons in Storybook:
 
-- Easy-to-use locale configuration
+- Easy-to-use Drupal integration
 - Simple drop-down menu
 - URL-linkable state for sharing
 
 ![Screenshot](./assets/screenshot.png)
 
-## Addon authors
+## End users
+
+End users configure the `supportedDrupalThemes` and `drupalTheme` parameters in `.storybook/preview.js`.
+
+`supportedDrupalThemes` is an object where the keys are the machine name of the Drupal themes and the values are the plain text name of that Drupal theme you want to use. This is what will appear in the dropdown in the toolbar.
+
+```javascript
+export const parameters = {
+  drupalTheme: 'umami',
+  supportedDrupalThemes: {
+    umami: {title: 'Umami'},
+    bartik: {title: 'Bartik'},
+    claro: {title: 'Claro'},
+    seven: {title: 'Seven'},
+  }
+};
+```
+
+## Storybook addon authors
 
 As an addon author, you can use this library by adding it as a dependency and adding the following to your `/preset.js` file:
 
@@ -32,32 +50,13 @@ function managerEntries(entry = []) {
 module.exports = {config, managerEntries};
 ```
 
-The currently selected theme is available in the `drupalTheme` global, so you can access it in a decorator using the following snippet:
+The currently selected theme is available in the `drupalTheme` global, so you can access it using the following snippet:
 
 ```js
-import { MyProvider } from 'your-drupal-library';
 import { useGlobals } from '@storybook/client-api';
 
 const myDecorator = (story, context) => {
   const [{drupalTheme}] = useGlobals();
-  return <MyProvider theme={drupalTheme}>;
-};
-```
-
-## End users
-
-End users configure the `supportedDrupalThemes` and `drupalTheme` parameters in `.storybook/preview.js`.
-
-`supportedDrupalThemes` is an object where the keys are the machine name of the Drupal themes and the values are the plain text name of that Drupal theme you want to use. This is what will appear in the dropdown in the toolbar.
-
-```javascript
-export const parameters = {
-  drupalTheme: 'umami',
-  supportedDrupalThemes: {
-    umami: {title: 'Umami'},
-    bartik: {title: 'Bartik'},
-    claro: {title: 'Claro'},
-    seven: {title: 'Seven'},
-  }
+  // Do something with the Drupal theme.
 };
 ```
