@@ -5,25 +5,27 @@ import {
   useGlobals,
 } from '@storybook/addons';
 
-export const withDrupalTheme = (StoryFn: StoryFunction, context: StoryContext) => {
-  const [{drupalTheme}] = useGlobals();
+export const withDrupalTheme = (
+  StoryFn: StoryFunction,
+  context: StoryContext,
+) => {
+  const [{ drupalTheme }] = useGlobals();
   if (drupalTheme) {
-    console.log(`Rendering component using: ${drupalTheme}`)
+    console.log(`Rendering component using Drupal theme: ${drupalTheme}`);
   }
 
   const [globals, updateGlobals] = useGlobals();
   useEffect(() => {
     const {
-      parameters: {drupalTheme, supportedDrupalThemes},
+      parameters: { drupalTheme, supportedDrupalThemes },
     } = context;
-    if (supportedDrupalThemes && !globals.locales) {
-      if (drupalTheme && !globals.locale) {
-        updateGlobals({drupalTheme, supportedDrupalThemes});
+    if (supportedDrupalThemes && !globals.supportedDrupalThemes) {
+      if (drupalTheme && !globals.drupalTheme) {
+        updateGlobals({ drupalTheme, supportedDrupalThemes });
       } else {
-        updateGlobals({supportedDrupalThemes});
+        updateGlobals({ supportedDrupalThemes });
       }
     }
   }, []);
   return StoryFn(undefined, undefined);
 };
-
