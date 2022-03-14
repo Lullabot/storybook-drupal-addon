@@ -1,3 +1,15 @@
+# v1.0.12 (Mon Mar 14 2022)
+
+#### 🐛 Bug Fix
+
+- fix: correct copy pasta [#8](https://github.com/Lullabot/storybook-drupal-addon/pull/8) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.11 (Mon Feb 28 2022)
 
 #### 🐛 Bug Fix
