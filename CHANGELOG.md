@@ -1,3 +1,15 @@
+# v1.0.13 (Mon Mar 14 2022)
+
+#### 🐛 Bug Fix
+
+- docs: improve readme [#9](https://github.com/Lullabot/storybook-drupal-addon/pull/9) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.12 (Mon Mar 14 2022)
 
 #### 🐛 Bug Fix
