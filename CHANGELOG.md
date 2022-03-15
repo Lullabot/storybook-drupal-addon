@@ -1,3 +1,15 @@
+# v1.0.14 (Tue Mar 15 2022)
+
+#### ⚠️ Pushed to `main`
+
+- refactor: use clearer syntax ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.13 (Mon Mar 14 2022)
 
 #### 🐛 Bug Fix
