@@ -9,18 +9,19 @@ export const withDrupalTheme = (
   StoryFn: StoryFunction,
   context: StoryContext,
 ) => {
-  const [{ drupalTheme }] = useGlobals();
-  if (drupalTheme) {
-    console.log(`Rendering component using Drupal theme: ${drupalTheme}`);
+  const [globals, updateGlobals] = useGlobals();
+  if (globals?.drupalTheme) {
+    console.log(
+      `Rendering component using Drupal theme: ${globals?.drupalTheme}`,
+    );
   }
 
-  const [globals, updateGlobals] = useGlobals();
   useEffect(() => {
     const {
       parameters: { drupalTheme, supportedDrupalThemes },
     } = context;
-    if (supportedDrupalThemes && !globals.supportedDrupalThemes) {
-      if (drupalTheme && !globals.drupalTheme) {
+    if (supportedDrupalThemes && !globals?.supportedDrupalThemes) {
+      if (drupalTheme && !globals?.drupalTheme) {
         updateGlobals({ drupalTheme, supportedDrupalThemes });
       } else {
         updateGlobals({ supportedDrupalThemes });
