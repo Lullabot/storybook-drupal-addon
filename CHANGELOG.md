@@ -1,3 +1,15 @@
+# v1.0.15 (Fri Mar 18 2022)
+
+#### ⚠️ Pushed to `main`
+
+- feat: refresh stories on server changes ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.14 (Tue Mar 15 2022)
 
 #### ⚠️ Pushed to `main`
