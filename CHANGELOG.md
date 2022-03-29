@@ -1,3 +1,15 @@
+# v1.0.17 (Tue Mar 29 2022)
+
+#### 🐛 Bug Fix
+
+- feat: JSON encoded parameters [#11](https://github.com/Lullabot/storybook-drupal-addon/pull/11) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.16 (Fri Mar 18 2022)
 
 #### ⚠️ Pushed to `main`
