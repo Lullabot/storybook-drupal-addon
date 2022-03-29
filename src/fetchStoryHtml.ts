@@ -19,7 +19,7 @@ function createNewBody(htmlDoc: Document): HTMLElement {
   const newBody = htmlDoc.createElement('body');
   // Copy the body attributes from the old body to the new, in case there is
   // anything functionally relevant.
-  htmlDoc.body.getAttributeNames().forEach(attrName => {
+  htmlDoc.body.getAttributeNames().forEach((attrName) => {
     newBody.setAttribute(attrName, htmlDoc.body.getAttribute(attrName));
   });
   newBody.innerHTML = clWrapper.innerHTML;
@@ -45,10 +45,11 @@ const fetchStoryHtml = async (
     _storyFileName: string;
     _drupalTheme: string;
     _variant?: string;
+    _params: string;
   } = {
-    ...params,
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
+    _params: JSON.stringify(params),
   };
   if (variant) {
     init._variant = variant;
