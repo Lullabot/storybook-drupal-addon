@@ -49,7 +49,7 @@ const fetchStoryHtml = async (
   } = {
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
-    _params: JSON.stringify(params),
+    _params: btoa(unescape(encodeURIComponent(JSON.stringify(params)))),
   };
   if (variant) {
     init._variant = variant;
