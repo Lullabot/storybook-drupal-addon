@@ -1,3 +1,15 @@
+# v1.0.18 (Sun Apr 24 2022)
+
+#### 🐛 Bug Fix
+
+- feat: params are base64 encoded [#13](https://github.com/Lullabot/storybook-drupal-addon/pull/13) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.17 (Tue Mar 29 2022)
 
 #### 🐛 Bug Fix
