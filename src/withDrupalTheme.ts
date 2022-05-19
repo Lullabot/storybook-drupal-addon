@@ -1,4 +1,4 @@
-import * as global from 'global';
+const globalWindow = require('global/window');
 import {
   StoryContext,
   StoryFn as StoryFunction,
@@ -7,8 +7,6 @@ import {
   useGlobals,
   useState,
 } from '@storybook/addons';
-
-const { window: globalWindow } = global;
 
 export const withDrupalTheme = (
   StoryFn: StoryFunction,
