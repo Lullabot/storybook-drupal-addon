@@ -1,3 +1,15 @@
+# v1.0.19 (Thu May 19 2022)
+
+#### 🐛 Bug Fix
+
+- fix: use window object directly [#14](https://github.com/Lullabot/storybook-drupal-addon/pull/14) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.18 (Sun Apr 24 2022)
 
 #### 🐛 Bug Fix
