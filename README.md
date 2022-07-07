@@ -8,9 +8,10 @@ A library for best-practice Drupal integration addons in Storybook:
 
 ![Screenshot](./assets/screenshot.png)
 
-## Configure your Drupal site 
+## Configure your Drupal site
 
 ### 🌳 Install the Drupal module
+
 Install and enable the Drupal module:
 
 ```console
@@ -19,6 +20,7 @@ drush pm:enable --yes cl_server;
 ```
 
 ### 🌴 Add Storybook to your Drupal repo
+
 From the root of your repo:
 
 ```console
@@ -28,7 +30,9 @@ sb init --builder webpack5 --type server
 # sb init --type server
 yarn add -D @lullabot/storybook-drupal-addon
 ```
+
 ### 🌵 Configure Storybook
+
 First enable the addon. Add it to the `addons` in the `.storybook/main.js`.
 
 ```javascript
@@ -40,8 +44,9 @@ module.exports = {
     '@lullabot/storybook-drupal-addon',
   ],
   // ...
-}
+};
 ```
+
 Then, configure the `supportedDrupalThemes` and `drupalTheme` parameters in `.storybook/preview.js`.
 
 `supportedDrupalThemes` is an object where the keys are the machine name of the Drupal themes and the values are the plain text name of that Drupal theme you want to use. This is what will appear in the dropdown in the toolbar.
@@ -56,22 +61,25 @@ export const parameters = {
   },
   drupalTheme: 'umami',
   supportedDrupalThemes: {
-    umami: {title: 'Umami'},
-    bartik: {title: 'Bartik'},
-    claro: {title: 'Claro'},
-    seven: {title: 'Seven'},
+    umami: { title: 'Umami' },
+    bartik: { title: 'Bartik' },
+    claro: { title: 'Claro' },
+    seven: { title: 'Seven' },
   },
   // ...
 };
 ```
 
 ## Start Storybook
+
 Start the development server Storybook server:
 
 ```console
 yarn storybook
 ```
+
 ---
+
 ## Storybook addon authors
 
 As an addon author, you can use this library by adding it as a dependency and adding the following to your `/preset.js` file:
@@ -93,7 +101,7 @@ function managerEntries(entry = []) {
   ];
 }
 
-module.exports = {config, managerEntries};
+module.exports = { config, managerEntries };
 ```
 
 The currently selected theme is available in the `drupalTheme` global, so you can access it using the following snippet:
@@ -102,7 +110,7 @@ The currently selected theme is available in the `drupalTheme` global, so you ca
 import { useGlobals } from '@storybook/client-api';
 
 const myDecorator = (story, context) => {
-  const [{drupalTheme}] = useGlobals();
+  const [{ drupalTheme }] = useGlobals();
   // Do something with the Drupal theme.
 };
 ```
