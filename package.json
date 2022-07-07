@@ -89,5 +89,6 @@
   },
   "bugs": {
     "url": "https://github.com/Lullabot/storybook-drupal-addon/issues"
-  }
+  },
+  "dependencies": {}
 }

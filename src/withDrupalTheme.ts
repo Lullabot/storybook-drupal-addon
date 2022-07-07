@@ -1,4 +1,3 @@
-const globalWindow = require('global/window');
 import {
   StoryContext,
   StoryFn as StoryFunction,
@@ -15,7 +14,7 @@ export const withDrupalTheme = (
   const [globals, updateGlobals] = useGlobals();
   const [hash, setHash] = useState<string>('');
   const refresh = useCallback(() => {
-    globalWindow.document.location.reload();
+    window.document.location.reload();
   }, []);
   if (globals?.drupalTheme) {
     console.log(
@@ -38,7 +37,8 @@ export const withDrupalTheme = (
 
   useEffect(() => {
     const sourceWrapper =
-      globalWindow?.__whmEventSourceWrapper['/__webpack_hmr'];
+      // @ts-ignore
+      window?.__whmEventSourceWrapper['/__webpack_hmr'];
     if (!sourceWrapper) {
       return;
     }
