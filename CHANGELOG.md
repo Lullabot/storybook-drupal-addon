@@ -1,3 +1,15 @@
+# v1.0.20 (Thu Jul 07 2022)
+
+#### 🐛 Bug Fix
+
+- chore: update dependencies [#16](https://github.com/Lullabot/storybook-drupal-addon/pull/16) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.19 (Thu May 19 2022)
 
 #### 🐛 Bug Fix
