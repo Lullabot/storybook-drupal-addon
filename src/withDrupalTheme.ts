@@ -37,12 +37,11 @@ export const withDrupalTheme = (
   }, [globals]);
 
   useEffect(() => {
-    const sourceWrapper =
-      globalWindow?.__whmEventSourceWrapper['/__webpack_hmr'];
-    if (!sourceWrapper) {
+    const hmr = globalWindow?.__whmEventSourceWrapper?.['/__webpack_hmr'];
+    if (!hmr) {
       return;
     }
-    sourceWrapper.addMessageListener(handleMessage);
+    hmr.addMessageListener(handleMessage);
 
     function handleMessage(event: MessageEvent) {
       if (event.data == '\uD83D\uDC93') {
