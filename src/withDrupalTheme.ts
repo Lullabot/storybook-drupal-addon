@@ -8,21 +8,25 @@ import {
   useState,
 } from '@storybook/addons';
 
+const  defaultDebounceTimeout = 300;
+
 export const withDrupalTheme = (
   StoryFn: StoryFunction,
   context: StoryContext,
 ) => {
   const [globals, updateGlobals] = useGlobals();
   const [hash, setHash] = useState<string>('');
+  const [isLocked, setLock] = useState<boolean>(false);
+  const delay = globals?.debounceTimeout || defaultDebounceTimeout;
   const refresh = useCallback(() => {
-    globalWindow.document.location.reload();
-  }, []);
-  if (globals?.drupalTheme) {
-    console.log(
-      `Rendering component using Drupal theme: ${globals?.drupalTheme}`,
-    );
-  }
-
+    if (!isLocked) {
+      // Lock the refresh procedure.
+      setLock(true);
+      globalWindow.document.location.reload();
+      // Unlock it again soon.
+      setTimeout(() => setLock(false), delay);
+    }
+  }, [isLocked, setLock, delay]);
   useEffect(() => {
     const {
       parameters: { drupalTheme, supportedDrupalThemes },
