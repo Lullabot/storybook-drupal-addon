@@ -25,7 +25,9 @@ function createNewBody(htmlDoc: Document): HTMLElement {
   newBody.innerHTML = clWrapper.innerHTML;
   // Include the Drupal "js footer" assets, i.e., all the <script> tags in
   // the <body>.
-  newBody.append(...Array.from(scripts));
+  const footerScripts = htmlDoc.createElement('div');
+  footerScripts.append(...Array.from(scripts));
+  newBody.append(footerScripts);
   return newBody;
 }
 

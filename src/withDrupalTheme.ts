@@ -8,7 +8,6 @@ import {
   useState,
 } from '@storybook/addons';
 
-const defaultDebounceTimeout = 300;
 const heartBeatEmoji = '\uD83D\uDC93';
 
 export const withDrupalTheme = (
@@ -16,30 +15,22 @@ export const withDrupalTheme = (
   context: StoryContext,
 ) => {
   const [globals, updateGlobals] = useGlobals();
-  const refresh = useCallback(() => {
-    const delay = globals?.debounceTimeout || defaultDebounceTimeout;
-    const isLocked = globals?.debounceTimeout || false;
-    if (!isLocked) {
-      // Lock the refresh procedure.
-      updateGlobals({isLocked: true})
-      // globalWindow.document.location.reload();
-      // Unlock it again soon.
-      setTimeout(() => updateGlobals({isLocked: false}), delay);
-    }
-  }, [globals]);
+  const drupalTheme = globals?.drupalTheme;
+  const supportedDrupalThemes = globals?.supportedDrupalThemes;
   useEffect(() => {
     const {
       parameters: {drupalTheme, supportedDrupalThemes},
     } = context;
-    if (supportedDrupalThemes && !globals?.supportedDrupalThemes) {
-      if (drupalTheme && !globals?.drupalTheme) {
+    if (supportedDrupalThemes && !supportedDrupalThemes) {
+      if (drupalTheme && !drupalTheme) {
         updateGlobals({drupalTheme, supportedDrupalThemes});
       } else {
         updateGlobals({supportedDrupalThemes});
       }
     }
-  }, [globals]);
+  }, [drupalTheme, supportedDrupalThemes]);
 
+  const currentHash = globals?.hash;
   useEffect(() => {
     const hmr = globalWindow?.__whmEventSourceWrapper?.['/__webpack_hmr'];
     if (!hmr) {
@@ -58,7 +49,6 @@ export const withDrupalTheme = (
         console.warn('Invalid HMR message: ' + event.data + '\n' + ex);
         return;
       }
-      const currentHash = globals?.hash;
       const newHash = data?.hash;
       if (!newHash) {
         return;
@@ -66,11 +56,11 @@ export const withDrupalTheme = (
       currentHash === newHash
         // If nothing changed in the Webpack hash, it may mean changes in the
         // server components.
-        ? refresh()
+        ? globalWindow.document.location.reload()
         // Store the hash in the globals because state will reset every time.
         : updateGlobals({hash: newHash});
     }
-  }, [globals]);
+  }, [currentHash]);
 
   return StoryFn(undefined, undefined);
 };
