@@ -22,7 +22,7 @@ export const withDrupalTheme = (
     if (!isLocked) {
       // Lock the refresh procedure.
       updateGlobals({isLocked: true})
-      globalWindow.document.location.reload();
+      // globalWindow.document.location.reload();
       // Unlock it again soon.
       setTimeout(() => updateGlobals({isLocked: false}), delay);
     }
