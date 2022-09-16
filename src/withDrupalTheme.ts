@@ -8,7 +8,8 @@ import {
   useState,
 } from '@storybook/addons';
 
-const  defaultDebounceTimeout = 300;
+const defaultDebounceTimeout = 300;
+const heartBeatEmoji = '\uD83D\uDC93';
 
 export const withDrupalTheme = (
   StoryFn: StoryFunction,
@@ -29,13 +30,13 @@ export const withDrupalTheme = (
   }, [isLocked, setLock, delay]);
   useEffect(() => {
     const {
-      parameters: { drupalTheme, supportedDrupalThemes },
+      parameters: {drupalTheme, supportedDrupalThemes},
     } = context;
     if (supportedDrupalThemes && !globals?.supportedDrupalThemes) {
       if (drupalTheme && !globals?.drupalTheme) {
-        updateGlobals({ drupalTheme, supportedDrupalThemes });
+        updateGlobals({drupalTheme, supportedDrupalThemes});
       } else {
-        updateGlobals({ supportedDrupalThemes });
+        updateGlobals({supportedDrupalThemes});
       }
     }
   }, [globals]);
@@ -48,7 +49,7 @@ export const withDrupalTheme = (
     hmr.addMessageListener(handleMessage);
 
     function handleMessage(event: MessageEvent) {
-      if (event.data == '\uD83D\uDC93') {
+      if (event.data == heartBeatEmoji) {
         return;
       }
       let data;
@@ -58,16 +59,15 @@ export const withDrupalTheme = (
         console.warn('Invalid HMR message: ' + event.data + '\n' + ex);
         return;
       }
-      if (!data?.hash) {
+      const newHash = data?.hash;
+      if (!newHash) {
         return;
       }
-      if (hash.length === 0 || hash !== data?.hash) {
-        setHash(data?.hash);
-      } else {
+      hash.length !== 0 && hash === newHash
         // If nothing changed in the Webpack hash, it may mean changes in the
         // server components.
-        refresh();
-      }
+        ? refresh()
+        : setHash(hash);
     }
   }, [hash, setHash]);
 
