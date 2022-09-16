@@ -16,18 +16,17 @@ export const withDrupalTheme = (
   context: StoryContext,
 ) => {
   const [globals, updateGlobals] = useGlobals();
-  const [hash, setHash] = useState<string>('');
-  const [isLocked, setLock] = useState<boolean>(false);
-  const delay = globals?.debounceTimeout || defaultDebounceTimeout;
   const refresh = useCallback(() => {
+    const delay = globals?.debounceTimeout || defaultDebounceTimeout;
+    const isLocked = globals?.debounceTimeout || false;
     if (!isLocked) {
       // Lock the refresh procedure.
-      setLock(true);
+      updateGlobals({isLocked: true})
       globalWindow.document.location.reload();
       // Unlock it again soon.
-      setTimeout(() => setLock(false), delay);
+      setTimeout(() => updateGlobals({isLocked: false}), delay);
     }
-  }, [isLocked, setLock, delay]);
+  }, [globals]);
   useEffect(() => {
     const {
       parameters: {drupalTheme, supportedDrupalThemes},
@@ -59,17 +58,19 @@ export const withDrupalTheme = (
         console.warn('Invalid HMR message: ' + event.data + '\n' + ex);
         return;
       }
+      const currentHash = globals?.hash;
       const newHash = data?.hash;
       if (!newHash) {
         return;
       }
-      hash.length !== 0 && hash === newHash
+      currentHash === newHash
         // If nothing changed in the Webpack hash, it may mean changes in the
         // server components.
         ? refresh()
-        : setHash(newHash);
+        // Store the hash in the globals because state will reset every time.
+        : updateGlobals({hash: newHash});
     }
-  }, [hash, setHash]);
+  }, [globals]);
 
   return StoryFn(undefined, undefined);
 };
