@@ -67,7 +67,7 @@ export const withDrupalTheme = (
         // If nothing changed in the Webpack hash, it may mean changes in the
         // server components.
         ? refresh()
-        : setHash(hash);
+        : setHash(newHash);
     }
   }, [hash, setHash]);
 
