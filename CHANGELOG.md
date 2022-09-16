@@ -1,3 +1,15 @@
+# v1.0.23 (Fri Sep 16 2022)
+
+#### 🐛 Bug Fix
+
+- perf: avoid unnecessary re-renders [#22](https://github.com/Lullabot/storybook-drupal-addon/pull/22) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.22 (Tue Aug 02 2022)
 
 #### 🐛 Bug Fix
