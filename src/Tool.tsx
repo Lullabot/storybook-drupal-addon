@@ -2,15 +2,16 @@ import React, { ReactElement } from 'react';
 import { useGlobals } from '@storybook/api';
 import {
   IconButton,
-  Link as LinkStorybook,
   TooltipLinkList,
   WithTooltip,
 } from '@storybook/components';
 import { TOOL_ID } from './constants';
 
-export interface Link extends LinkStorybook {
+export interface Link {
+  id: string;
   active: boolean;
   title: string;
+  onClick: () => void
 }
 
 type ExpandedThemeValue = { title: string };

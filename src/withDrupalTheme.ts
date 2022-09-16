@@ -8,34 +8,29 @@ import {
   useState,
 } from '@storybook/addons';
 
+const heartBeatEmoji = '\uD83D\uDC93';
+
 export const withDrupalTheme = (
   StoryFn: StoryFunction,
   context: StoryContext,
 ) => {
   const [globals, updateGlobals] = useGlobals();
-  const [hash, setHash] = useState<string>('');
-  const refresh = useCallback(() => {
-    globalWindow.document.location.reload();
-  }, []);
-  if (globals?.drupalTheme) {
-    console.log(
-      `Rendering component using Drupal theme: ${globals?.drupalTheme}`,
-    );
-  }
-
+  const drupalTheme = globals?.drupalTheme;
+  const supportedDrupalThemes = globals?.supportedDrupalThemes;
   useEffect(() => {
     const {
-      parameters: { drupalTheme, supportedDrupalThemes },
+      parameters: {drupalTheme, supportedDrupalThemes},
     } = context;
-    if (supportedDrupalThemes && !globals?.supportedDrupalThemes) {
-      if (drupalTheme && !globals?.drupalTheme) {
-        updateGlobals({ drupalTheme, supportedDrupalThemes });
+    if (supportedDrupalThemes && !supportedDrupalThemes) {
+      if (drupalTheme && !drupalTheme) {
+        updateGlobals({drupalTheme, supportedDrupalThemes});
       } else {
-        updateGlobals({ supportedDrupalThemes });
+        updateGlobals({supportedDrupalThemes});
       }
     }
-  }, [globals]);
+  }, [drupalTheme, supportedDrupalThemes]);
 
+  const currentHash = globals?.hash;
   useEffect(() => {
     const hmr = globalWindow?.__whmEventSourceWrapper?.['/__webpack_hmr'];
     if (!hmr) {
@@ -44,7 +39,7 @@ export const withDrupalTheme = (
     hmr.addMessageListener(handleMessage);
 
     function handleMessage(event: MessageEvent) {
-      if (event.data == '\uD83D\uDC93') {
+      if (event.data == heartBeatEmoji) {
         return;
       }
       let data;
@@ -54,18 +49,18 @@ export const withDrupalTheme = (
         console.warn('Invalid HMR message: ' + event.data + '\n' + ex);
         return;
       }
-      if (!data?.hash) {
+      const newHash = data?.hash;
+      if (!newHash) {
         return;
       }
-      if (hash.length === 0 || hash !== data?.hash) {
-        setHash(data?.hash);
-      } else {
+      currentHash === newHash
         // If nothing changed in the Webpack hash, it may mean changes in the
         // server components.
-        refresh();
-      }
+        ? globalWindow.document.location.reload()
+        // Store the hash in the globals because state will reset every time.
+        : updateGlobals({hash: newHash});
     }
-  }, [globals]);
+  }, [currentHash]);
 
   return StoryFn(undefined, undefined);
 };
