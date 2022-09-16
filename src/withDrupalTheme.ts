@@ -47,7 +47,29 @@ export const withDrupalTheme = (
     }
     hmr.addMessageListener(handleMessage);
 
-    function handleMessage(event: MessageEvent) {}
+    function handleMessage(event: MessageEvent) {
+      if (event.data == heartBeatEmoji) {
+        return;
+      }
+      let data;
+      try {
+        data = JSON.parse(event.data);
+      } catch (ex) {
+        console.warn('Invalid HMR message: ' + event.data + '\n' + ex);
+        return;
+      }
+      const currentHash = globals?.hash;
+      const newHash = data?.hash;
+      if (!newHash) {
+        return;
+      }
+      currentHash === newHash
+        // If nothing changed in the Webpack hash, it may mean changes in the
+        // server components.
+        ? refresh()
+        // Store the hash in the globals because state will reset every time.
+        : updateGlobals({hash: newHash});
+    }
   }, [globals]);
 
   return StoryFn(undefined, undefined);
