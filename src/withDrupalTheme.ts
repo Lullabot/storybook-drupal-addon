@@ -69,7 +69,7 @@ export const withDrupalTheme = (
         refresh();
       }
     }
-  }, [globals]);
+  }, [hash, setHash]);
 
   return StoryFn(undefined, undefined);
 };
