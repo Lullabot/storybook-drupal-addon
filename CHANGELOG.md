@@ -1,3 +1,15 @@
+# v1.0.24 (Wed Sep 28 2022)
+
+#### 🐛 Bug Fix
+
+- fix: allow components to have nested props [#23](https://github.com/Lullabot/storybook-drupal-addon/pull/23) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.23 (Fri Sep 16 2022)
 
 #### 🐛 Bug Fix
