@@ -2,6 +2,7 @@ type StorybookContext = {
   globals: {
     drupalTheme?: string;
   };
+  args: Record<string, unknown>,
   parameters: {
     options: {
       variant: string;
@@ -51,7 +52,7 @@ const fetchStoryHtml = async (
   } = {
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
-    _params: btoa(unescape(encodeURIComponent(JSON.stringify(params)))),
+    _params: btoa(unescape(encodeURIComponent(JSON.stringify(context.args)))),
   };
   if (variant) {
     init._variant = variant;
