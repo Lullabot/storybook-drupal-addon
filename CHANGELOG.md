@@ -1,3 +1,15 @@
+# v1.0.25 (Sun Oct 09 2022)
+
+#### 🐛 Bug Fix
+
+- fix: undo excluding change [#25](https://github.com/Lullabot/storybook-drupal-addon/pull/25) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.24 (Wed Sep 28 2022)
 
 #### 🐛 Bug Fix
