@@ -2,10 +2,8 @@ const globalWindow = require('global/window');
 import {
   StoryContext,
   StoryFn as StoryFunction,
-  useCallback,
   useEffect,
   useGlobals,
-  useState,
 } from '@storybook/addons';
 
 const heartBeatEmoji = '\uD83D\uDC93';
