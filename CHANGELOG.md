@@ -1,3 +1,15 @@
+# v1.0.26 (Sun Oct 09 2022)
+
+#### ⚠️ Pushed to `main`
+
+- refactor: remove unused imports ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.25 (Sun Oct 09 2022)
 
 #### 🐛 Bug Fix
