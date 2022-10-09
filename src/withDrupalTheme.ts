@@ -21,7 +21,7 @@ export const withDrupalTheme = (
     const {
       parameters: {drupalTheme, supportedDrupalThemes},
     } = context;
-    if (supportedDrupalThemes && !supportedDrupalThemes) {
+    if (supportedDrupalThemes) {
       if (drupalTheme && !drupalTheme) {
         updateGlobals({drupalTheme, supportedDrupalThemes});
       } else {
