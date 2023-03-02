@@ -1,3 +1,15 @@
+# v1.0.27 (Thu Mar 02 2023)
+
+#### 🐛 Bug Fix
+
+- fix: loading storybook/drupal-addon twice [#27](https://github.com/Lullabot/storybook-drupal-addon/pull/27) ([@deviantintegral](https://github.com/deviantintegral))
+
+#### Authors: 1
+
+- Andrew Berry ([@deviantintegral](https://github.com/deviantintegral))
+
+---
+
 # v1.0.26 (Sun Oct 09 2022)
 
 #### ⚠️ Pushed to `main`
