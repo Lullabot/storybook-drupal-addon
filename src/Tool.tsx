@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
-import { useGlobals } from '@storybook/api';
+import React, { memo, ReactElement } from 'react';
+import { useGlobals } from '@storybook/manager-api';
 import {
   IconButton,
   TooltipLinkList,
@@ -47,12 +47,11 @@ const getDrupalThemes = (
         },
       ];
 
-export const Tool = (): ReactElement => {
+export const Tool = memo((): ReactElement => {
   const [{ drupalTheme, supportedDrupalThemes }, updateGlobals] = useGlobals();
 
   return (
     <WithTooltip
-      closeOnClick={true}
       placement="top"
       trigger="click"
       tooltip={({ onHide }) => (
@@ -79,4 +78,4 @@ export const Tool = (): ReactElement => {
       </IconButton>
     </WithTooltip>
   );
-};
+});

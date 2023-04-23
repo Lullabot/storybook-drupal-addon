@@ -1,16 +1,20 @@
-const globalWindow = require('global/window');
-import {
+import { global } from '@storybook/global';
+import type {
+  Renderer,
+  PartialStoryFn as StoryFunction,
   StoryContext,
-  StoryFn as StoryFunction,
+} from "@storybook/types";
+import {
   useEffect,
   useGlobals,
-} from '@storybook/addons';
+} from '@storybook/preview-api';
 
+const { window: globalWindow } = global;
 const heartBeatEmoji = '\uD83D\uDC93';
 
 export const withDrupalTheme = (
-  StoryFn: StoryFunction,
-  context: StoryContext,
+  StoryFn: StoryFunction<Renderer>,
+  context: StoryContext<Renderer>,
 ) => {
   const [globals, updateGlobals] = useGlobals();
   const drupalTheme = globals?.drupalTheme;
@@ -60,5 +64,5 @@ export const withDrupalTheme = (
     }
   }, [currentHash]);
 
-  return StoryFn(undefined, undefined);
+  return StoryFn();
 };
