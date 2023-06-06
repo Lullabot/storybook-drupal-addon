@@ -1,6 +1,7 @@
 type StorybookContext = {
   globals: {
     drupalTheme?: string;
+    localDev?: boolean;
   };
   args: Record<string, unknown>,
   parameters: {
@@ -9,6 +10,7 @@ type StorybookContext = {
     };
     fileName: string;
     drupalTheme?: string;
+    localDev?: boolean,
     supportedDrupalThemes?: Record<string, { title: string }>;
   };
 };
@@ -47,11 +49,13 @@ const fetchStoryHtml = async (
   const init: {
     _storyFileName: string;
     _drupalTheme: string;
+    _localDev: string;
     _variant?: string;
     _params: string;
   } = {
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
+    _localDev: (context.globals.localDev || context.parameters.localDev).toString(),
     _params: btoa(unescape(encodeURIComponent(JSON.stringify(context.args)))),
   };
   if (variant) {
@@ -83,9 +87,17 @@ const fetchStoryHtml = async (
     // We need to extract the HTML for the ___cl-wrapper.
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
+
     // Swap the old body for the new.
     htmlDoc.body = createNewBody(htmlDoc);
-    return htmlDoc.children[0].outerHTML;
+    let outerHTML = htmlDoc.children[0].outerHTML;
+
+    // If we are on localDev replace all the CSS/JS urls with local paths. We cannot use `replaceAll` since it needs es2021.
+    if (init._localDev) {
+      outerHTML = outerHTML.split(url).join("/");
+    }
+
+    return ;
   } catch (e) {
     console.error(e);
     throw e;
