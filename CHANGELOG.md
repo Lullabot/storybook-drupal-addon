@@ -1,3 +1,15 @@
+# v1.0.28 (Tue Jun 06 2023)
+
+#### 🐛 Bug Fix
+
+- feat: upgrade to Storybook 7 [#30](https://github.com/Lullabot/storybook-drupal-addon/pull/30) ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v1.0.27 (Thu Mar 02 2023)
 
 #### 🐛 Bug Fix
