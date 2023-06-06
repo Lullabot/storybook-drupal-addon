@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
-import { useGlobals } from '@storybook/api';
+import { useGlobals } from '@storybook/manager-api';
 import {
   IconButton,
   TooltipLinkList,
   WithTooltip,
 } from '@storybook/components';
-import { TOOL_ID } from './constants';
+import { EVENT_NAME, TOOL_ID } from './constants';
+import {addons} from '@storybook/preview-api';
 
 export interface Link {
   id: string;
@@ -52,7 +53,6 @@ export const Tool = (): ReactElement => {
 
   return (
     <WithTooltip
-      closeOnClick={true}
       placement="top"
       trigger="click"
       tooltip={({ onHide }) => (
@@ -63,6 +63,7 @@ export const Tool = (): ReactElement => {
             (selected) => {
               if (selected !== drupalTheme) {
                 updateGlobals({ drupalTheme: selected });
+                addons.getChannel().emit(EVENT_NAME, selected);
               }
               onHide();
             },
