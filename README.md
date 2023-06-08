@@ -58,22 +58,30 @@ Then, configure the `supportedDrupalThemes`, `localDev` and `drupalTheme` parame
 
 ```javascript
 // .storybook/preview.js
-export const parameters = {
+const preview: Preview = {
   // ...
-  server: {
-    // Replace this with your Drupal site URL, or an environment variable.
-    url: 'http://local.contrib.com',
+  globals: {
+    // ...
+    localDev: true,
+    drupalTheme: 'umami',
+    supportedDrupalThemes: {
+      umami: {title: 'Umami'},
+      bartik: {title: 'Bartik'},
+      claro: {title: 'Claro'},
+      seven: {title: 'Seven'},
+    },
   },
-  drupalTheme: 'umami',
-  localDev: true,
-  supportedDrupalThemes: {
-    umami: { title: 'Umami' },
-    bartik: { title: 'Bartik' },
-    claro: { title: 'Claro' },
-    seven: { title: 'Seven' },
+  parameters: {
+    server: {
+      // Replace this with your Drupal site URL, or an environment variable.
+      url: 'http://local.contrib.com',
+    },
+    // ...
   },
   // ...
 };
+
+export default preview;
 ```
 
 ## Start Storybook
@@ -88,35 +96,39 @@ yarn storybook
 
 ## Storybook addon authors
 
-As an addon author, you can use this library by adding it as a dependency and adding the following to your `/preset.js` file:
+As an addon author, you can use this library by adding it as a dependency and adding the following to your `src/manager.ts` and `src/preview.ts` files:
 
-```js
-function config(entry = []) {
-  return [
-    ...entry,
-    require.resolve('@lullabot/storybook-drupal-addon/preview'), // <-- library's preview preset
-    require.resolve('./dist/esm/preset/preview'), // <-- your addon's preview preset (if present)
-  ];
-}
-
-function managerEntries(entry = []) {
-  return [
-    ...entry,
-    require.resolve('@lullabot/storybook-drupal-addon/manager'),
-    require.resolve('./dist/esm/preset/manager'), // <-- your addon's manager (if present)
-  ];
-}
-
-module.exports = { config, managerEntries };
+*src/manager.ts*
+```typescript
+export * from '@lullabot/storybook-drupal-addon/manager';
 ```
 
-The currently selected theme is available in the `drupalTheme` global, so you can access it using the following snippet:
+*src/preview.ts*
+```typescript
+import type { Renderer, ProjectAnnotations } from '@storybook/types';
+import drupalPreview from '@lullabot/storybook-drupal-addon/preview';
+import { withYourDrupalDecorator } from './withYourDecorator';
 
-```js
-import { useGlobals } from '@storybook/client-api';
+// @ts-ignore
+const drupalDecorators = drupalPreview?.decorators || [];
+
+const preview: ProjectAnnotations<Renderer> = {
+    ...drupalPreview,
+    decorators: [...drupalDecorators, withYourI18nDecorator],
+}
+
+export default preview;
+```
+
+The currently selected drupal theme is available in the `drupalTheme` global, so you can access it in a decorator using the following snippet:
+
+```typescript
+import { MyProvider } from 'your-drupal-library';
+import { useGlobals } from '@storybook/manager-api';
 
 const myDecorator = (story, context) => {
-  const [{ drupalTheme }] = useGlobals();
-  // Do something with the Drupal theme.
-};
+  const [{drupalTheme}] = useGlobals();
+  
+  return <MyProvider drupalTheme={drupalTheme}>;
+}
 ```
