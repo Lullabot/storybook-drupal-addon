@@ -2,6 +2,7 @@ import type {Preview} from '@storybook/react';
 
 const preview: Preview = {
   globals: {
+    localDev: false,
     drupalTheme: 'umami',
     supportedDrupalThemes: {
       umami: {title: 'Umami'},
