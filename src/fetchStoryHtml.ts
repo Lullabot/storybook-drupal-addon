@@ -94,7 +94,7 @@ const fetchStoryHtml = async (
 
     // If we are on localDev replace all the CSS/JS urls with local paths. We cannot use `replaceAll` since it needs es2021.
     if (init._localDev) {
-      outerHTML = outerHTML.split(url).join("/");
+      outerHTML = outerHTML.split(url).join("");
     }
 
     return outerHTML;
