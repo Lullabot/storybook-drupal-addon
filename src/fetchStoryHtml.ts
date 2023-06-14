@@ -97,7 +97,7 @@ const fetchStoryHtml = async (
       outerHTML = outerHTML.split(url).join("/");
     }
 
-    return ;
+    return outerHTML;
   } catch (e) {
     console.error(e);
     throw e;
