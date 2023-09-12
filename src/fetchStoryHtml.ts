@@ -17,20 +17,40 @@ type StorybookContext = {
 
 function createNewBody(htmlDoc: Document): HTMLElement {
   const clWrapper = htmlDoc.getElementById('___cl-wrapper');
+
   // Extract the missing scripts and re-add them.
   const scripts = htmlDoc.getElementsByTagName('script');
   const newBody = htmlDoc.createElement('body');
+
   // Copy the body attributes from the old body to the new, in case there is
   // anything functionally relevant.
   htmlDoc.body.getAttributeNames().forEach((attrName) => {
     newBody.setAttribute(attrName, htmlDoc.body.getAttribute(attrName));
   });
   newBody.innerHTML = clWrapper.innerHTML;
+
+  let images = newBody.getElementsByTagName('img');
+  console.log(images);
+
+  // Replace relative image paths to start with "./"
+  if (images !== undefined) {
+    for (let image of images) {
+      const src = image.getAttribute("src");
+
+      console.log(src);
+
+      if (!src.indexOf("http") == 0) {
+        image.setAttribute("src", "." + src);
+      }
+    }
+  }
+
   // Include the Drupal "js footer" assets, i.e., all the <script> tags in
   // the <body>.
   const footerScripts = htmlDoc.createElement('div');
   footerScripts.append(...Array.from(scripts));
   newBody.append(footerScripts);
+
   return newBody;
 }
 
