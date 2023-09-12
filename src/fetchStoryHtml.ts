@@ -29,16 +29,11 @@ function createNewBody(htmlDoc: Document): HTMLElement {
   });
   newBody.innerHTML = clWrapper.innerHTML;
 
-  let images = newBody.getElementsByTagName('img');
-  console.log(images);
-
   // Replace relative image paths to start with "./"
+  let images = newBody.getElementsByTagName('img');
   if (images !== undefined) {
     for (let image of images) {
       const src = image.getAttribute("src");
-
-      console.log(src);
-
       if (!src.indexOf("http") == 0) {
         image.setAttribute("src", "." + src);
       }
