@@ -103,7 +103,7 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Dupal Addon",
+    "displayName": "Drupal Addon",
     "supportedFrameworks": [
       "server"
     ],
