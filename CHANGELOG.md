@@ -1,3 +1,15 @@
+# v2.0.2 (Mon Sep 18 2023)
+
+#### 🐛 Bug Fix
+
+- Update package.json [#43](https://github.com/Lullabot/storybook-drupal-addon/pull/43) ([@edprince](https://github.com/edprince))
+
+#### Authors: 1
+
+- Ed Prince ([@edprince](https://github.com/edprince))
+
+---
+
 # v1.0.28 (Thu Jun 08 2023)
 
 #### 🐛 Bug Fix
