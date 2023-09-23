@@ -46,11 +46,14 @@ const fetchStoryHtml = async (
   const fetchUrl = new URL(`${url}/_cl_server`);
   const init: {
     _componentFileName: string;
+    // Preserve backward compatibility with older versions of drupal/cl_server:
+    _storyFileName: string;
     _drupalTheme: string;
     _variant?: string;
     _params: string;
   } = {
     _componentFileName: context.parameters.fileName,
+    _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
     _params: btoa(unescape(encodeURIComponent(JSON.stringify(context.args)))),
   };
