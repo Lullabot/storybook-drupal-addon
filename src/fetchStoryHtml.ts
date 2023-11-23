@@ -48,11 +48,9 @@ const fetchStoryHtml = async (
     _storyFileName: string;
     _drupalTheme: string;
     _variant?: string;
-    _params: string;
   } = {
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
-    _params: btoa(unescape(encodeURIComponent(JSON.stringify(context.args)))),
   };
   if (variant) {
     init._variant = variant;
@@ -64,7 +62,13 @@ const fetchStoryHtml = async (
   fetchUrl.username = '';
   fetchUrl.password = '';
 
-  const response = await fetch(fetchUrl.toString());
+  const response = await fetch(fetchUrl.toString(), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  });
   const htmlContents = await response.text();
   if (response.status >= 399) {
     const statusText = `${response.status} (${response.statusText})`;
