@@ -21,7 +21,7 @@ yarn storybook
 ## Tips for writing YML stories
 
 - Anotated example with the different options for writing stories: https://gitlab.com/-/snippets/2556203
-- Closed issue for some nifty tips: https://github.com/Lullabot/storybook-drupal-addon/issues/34
+- Closed issue with some nifty tips: https://github.com/Lullabot/storybook-drupal-addon/issues/34
 
 ---
 
