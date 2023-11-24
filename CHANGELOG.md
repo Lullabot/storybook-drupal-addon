@@ -1,3 +1,15 @@
+# v2.0.3 (Thu Nov 23 2023)
+
+#### 🐛 Bug Fix
+
+- #38 Convert the component fetch to a POST request [#39](https://github.com/Lullabot/storybook-drupal-addon/pull/39) ([@lussoluca](https://github.com/lussoluca))
+
+#### Authors: 1
+
+- Lusso Luca ([@lussoluca](https://github.com/lussoluca))
+
+---
+
 # v2.0.2 (Mon Sep 18 2023)
 
 #### 🐛 Bug Fix
