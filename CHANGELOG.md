@@ -1,3 +1,15 @@
+# v2.0.6 (Fri Nov 24 2023)
+
+#### ⚠️ Pushed to `main`
+
+- fix: update README.md ([@e0ipso](https://github.com/e0ipso))
+
+#### Authors: 1
+
+- Mateu Aguiló Bosch ([@e0ipso](https://github.com/e0ipso))
+
+---
+
 # v2.0.5 (Fri Nov 24 2023)
 
 #### ⚠️ Pushed to `main`
