@@ -8,75 +8,7 @@ A library for best-practice Drupal integration addons in Storybook:
 
 ![Screenshot](./assets/screenshot.png)
 
-## Configure your Drupal site
-
-### 🌳 Install the Drupal module
-
-Install and enable the Drupal module:
-
-```console
-composer require drupal/cl_server;
-drush pm:enable --yes cl_server;
-```
-
-### 🌴 Add Storybook to your Drupal repo
-
-From the root of your repo:
-
-```console
-yarn global add sb@latest;
-sb init --builder webpack5 --type server
-# If you have a reason to use Webpack4 use the following instead:
-# sb init --type server
-yarn add -D @lullabot/storybook-drupal-addon
-```
-
-### 🌵 Configure Storybook
-
-First enable the addon. Add it to the `addons` in the `.storybook/main.js`.
-
-```javascript
-// .storybook/main.js
-module.exports = {
-  // ...
-  addons: [
-    // ...
-    '@lullabot/storybook-drupal-addon',
-  ],
-  // ...
-};
-```
-
-Then, configure the `supportedDrupalThemes` and `drupalTheme` parameters in `.storybook/preview.js`.
-
-`supportedDrupalThemes` is an object where the keys are the machine name of the Drupal themes and the values are the plain text name of that Drupal theme you want to use. This is what will appear in the dropdown in the toolbar.
-
-```javascript
-// .storybook/preview.js
-const preview: Preview = {
-  // ...
-  globals: {
-    // ...
-    drupalTheme: 'umami',
-    supportedDrupalThemes: {
-      umami: {title: 'Umami'},
-      bartik: {title: 'Bartik'},
-      claro: {title: 'Claro'},
-      seven: {title: 'Seven'},
-    },
-  },
-  parameters: {
-    server: {
-      // Replace this with your Drupal site URL, or an environment variable.
-      url: 'http://local.contrib.com',
-    },
-    // ...
-  },
-  // ...
-};
-
-export default preview;
-```
+Follow the instructions in the documentation for the Drupal module [CL Server](https://git.drupalcode.org/project/cl_server/-/blob/2.x/docs/storybook.md?ref_type=heads).
 
 ## Start Storybook
 
