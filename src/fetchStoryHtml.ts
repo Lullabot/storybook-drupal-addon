@@ -1,6 +1,7 @@
 type StorybookContext = {
   globals: {
     drupalTheme?: string;
+    localDev?: boolean;
   };
   args: Record<string, unknown>,
   parameters: {
@@ -9,26 +10,65 @@ type StorybookContext = {
     };
     fileName: string;
     drupalTheme?: string;
+    localDev?: boolean,
     supportedDrupalThemes?: Record<string, { title: string }>;
   };
 };
 
+// Replace relative paths to start with "./". Used for local development.
+function relativeAssetsByTag(htmlDoc: Document, tag: string, serverUrl: string): HTMLElement {
+  let elements = htmlDoc.getElementsByTagName(tag);
+
+  // Default attribute is src (script, img)
+  let attr = "src";
+
+  if (tag === "link") {
+    attr = "href";
+  }
+
+  if (elements !== undefined) {
+    for (let element of elements) {
+      if (element) {
+        const myAttr = element && element.getAttribute(attr);
+
+        // link, script tags starting with serverUrl
+        if (myAttr && (tag === "link" || tag === "script") && myAttr.startsWith(serverUrl)) {
+          element.setAttribute(attr, "." + myAttr.replace(serverUrl, ""));
+        }
+        // img (public files)
+        if (myAttr && myAttr.startsWith("/sites/default")) {
+          element.setAttribute(attr, serverUrl + myAttr);
+        }
+        // img (other relative)
+        if (myAttr && !myAttr.startsWith("/sites/default") && myAttr.startsWith("/")) {
+          element.setAttribute(attr, "." + myAttr);
+        }
+      }
+    }
+  }
+  return htmlDoc;
+}
+
 function createNewBody(htmlDoc: Document): HTMLElement {
   const clWrapper = htmlDoc.getElementById('___cl-wrapper');
+
   // Extract the missing scripts and re-add them.
   const scripts = htmlDoc.getElementsByTagName('script');
   const newBody = htmlDoc.createElement('body');
+
   // Copy the body attributes from the old body to the new, in case there is
   // anything functionally relevant.
   htmlDoc.body.getAttributeNames().forEach((attrName) => {
     newBody.setAttribute(attrName, htmlDoc.body.getAttribute(attrName));
   });
   newBody.innerHTML = clWrapper.innerHTML;
+
   // Include the Drupal "js footer" assets, i.e., all the <script> tags in
   // the <body>.
   const footerScripts = htmlDoc.createElement('div');
   footerScripts.append(...Array.from(scripts));
   newBody.append(footerScripts);
+
   return newBody;
 }
 
@@ -47,10 +87,13 @@ const fetchStoryHtml = async (
   const init: {
     _storyFileName: string;
     _drupalTheme: string;
+    _localDev: string;
     _variant?: string;
   } = {
     _storyFileName: context.parameters.fileName,
     _drupalTheme: context.globals.drupalTheme || context.parameters.drupalTheme,
+    _localDev: (context.globals.localDev || context.parameters.localDev).toString(),
+    _params: btoa(unescape(encodeURIComponent(JSON.stringify(context.args)))),
   };
   if (variant) {
     init._variant = variant;
@@ -86,10 +129,21 @@ const fetchStoryHtml = async (
     // The HTML contents Drupal sends back includes regions, blocks, menus, etc.
     // We need to extract the HTML for the ___cl-wrapper.
     const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(htmlContents, 'text/html');
+    let htmlDoc = parser.parseFromString(htmlContents, 'text/html');
+
     // Swap the old body for the new.
     htmlDoc.body = createNewBody(htmlDoc);
-    return htmlDoc.children[0].outerHTML;
+
+    // If we are on localDev replace all the CSS/JS urls with local paths.
+    if (init._localDev) {
+      htmlDoc = relativeAssetsByTag(htmlDoc, "link", url);
+      // htmlDoc = relativeAssetsByTag(htmlDoc, "img", url);
+      htmlDoc = relativeAssetsByTag(htmlDoc, "script", url);
+    }
+
+    let outerHTML = htmlDoc.children[0].outerHTML;
+
+    return outerHTML;
   } catch (e) {
     console.error(e);
     throw e;
