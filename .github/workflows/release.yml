@@ -18,7 +18,7 @@ jobs:
           node-version: 18.x
 
       - name: Install dependencies
-        run: yarn install --ignore-scripts
+        run: yarn install
 
       - name: Create Release
         env:
